@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from employees.request import get_all_employees, get_single_employee
 from locations.request import get_all_locations, get_single_location
 from animals import get_all_animals, get_single_animal
 
@@ -88,6 +89,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 response = f"{get_single_location(id)}"
             else:
                 response = f"{get_all_locations()}"
+
+        if resource == "employees":
+            if id is not None:
+                response = f"{get_single_employee(id)}"
+            else:
+                response = f"{get_all_employees()}"
 
         self.wfile.write(response.encode())
 
