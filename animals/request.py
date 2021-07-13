@@ -26,11 +26,11 @@ ANIMALS = [
 
 
 def get_all_animals():
-
     '''
     gets all animals in request
     '''
     return ANIMALS
+
 
 def get_single_animal(id):
     '''
@@ -48,4 +48,19 @@ def get_single_animal(id):
             requested_animal = animal
 
     return requested_animal
-    
+
+
+def create_animal(animal):
+    '''
+    posts the new animal information with an id + 1 to the last indexed id
+    '''
+
+    max_id = ANIMALS[-1]['id']
+
+    new_id = max_id + 1
+
+    animal["id"] = new_id
+
+    ANIMALS.append(animal)
+
+    return animal

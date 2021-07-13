@@ -1,8 +1,9 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
+from customers.request import get_single_customer, get_all_customers
 from employees.request import get_all_employees, get_single_employee
 from locations.request import get_all_locations, get_single_location
-from animals import get_all_animals, get_single_animal
-
+from animals import get_all_animals, get_single_animal, create_animal
 # Here's a class. It inherits from another class.
 # For now, think of a class as a container for functions that
 # work together for a common purpose. In this case, that
@@ -96,6 +97,12 @@ class HandleRequests(BaseHTTPRequestHandler):
             else:
                 response = f"{get_all_employees()}"
 
+        if resource == "customers":
+            if id is not None:
+                response = f"{get_single_customer(id)}"
+            else:
+                response = f"{get_all_customers()}"
+
         self.wfile.write(response.encode())
 
     # Here's a method on the class that overrides the parent's method.
@@ -106,11 +113,19 @@ class HandleRequests(BaseHTTPRequestHandler):
         """
         # Set response code to 'Created'
         self._set_headers(201)
-
         content_len = int(self.headers.get('content-length', 0))
         post_body = self.rfile.read(content_len)
-        response = f"received post request:<br>{post_body}"
-        self.wfile.write(response.encode())
+
+        post_body = json.loads(post_body)
+
+        (resource, _) = self.parse_url(self.path)
+
+        new_animal = None
+
+        if resource == "animals":
+            new_animal = create_animal(post_body)
+
+        self.wfile.write(f"{new_animal}".encode())
 
     # Here's a method on the class that overrides the parent's method.
     # It handles any PUT request.
