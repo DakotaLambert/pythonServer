@@ -1,9 +1,15 @@
 {
-    "cSpell.ignoreWords": [
-        "bjorn",
-        "manchuteries",
-        "mizgog",
-        "murphoneum",
-        "tfyuk"
-    ]
+  "cSpell.ignoreWords": [
+    "beebo",
+    "bjorn",
+    "manchuteries",
+    "mizgog",
+    "muphunkity",
+    "murphoneum",
+    "sheanifer",
+    "tfyuk"
+  ],
+  "python.formatting.autopep8Path": "/home/dakota/.local/share/virtualenvs/python-server-_JU4PNhy/bin/autopep8"
+  ,
+  "python.linting.pylintEnabled": true
 }
