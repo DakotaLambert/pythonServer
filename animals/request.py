@@ -76,6 +76,11 @@ def create_animal(animal):
 
 
 def delete_animal(id):
+    """[summary]
+
+    Args:
+        id ([type]): [description]
+    """
     with sqlite3.connect("./kennel.db") as conn:
         db_cursor = conn.cursor()
 
@@ -83,8 +88,6 @@ def delete_animal(id):
         DELETE FROM animal
         WHERE id = ?
         """, (id, ))
-
-
 
 
 def update_animal(id, new_animal):
